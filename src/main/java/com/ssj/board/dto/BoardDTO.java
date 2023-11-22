@@ -1,19 +1,21 @@
 package com.ssj.board.dto;
 
+import com.ssj.board.entity.BaseEntity;
+import com.ssj.board.entity.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 /*
-* DTO(Data Transfer Object)
-* VO
-* Bean
-* 위의 세가지는 비슷한 목적을 가진 클래스
-*/
+ * DTO(Data Transfer Object)
+ * VO
+ * Bean
+ * 위의 세가지는 비슷한 목적을 가진 클래스
+ */
 
 /*
-* Lombok getter, setter
-*/
+ * Lombok getter, setter
+ */
 @Getter
 @Setter
 @ToString
@@ -28,4 +30,17 @@ public class BoardDTO {
     private int boardHits;
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
+
+    public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(boardEntity.getId());
+        boardDTO.setBoardWriter(boardEntity.getBoardWriter());
+        boardDTO.setBoardPass(boardEntity.getBoardPass());
+        boardDTO.setBoardTitle(boardEntity.getBoardTitle());
+        boardDTO.setBoardContents(boardEntity.getBoardContents());
+        boardDTO.setBoardHits(boardEntity.getBoardHits());
+        boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
+        boardDTO.setBoardUpdatedTime(boardEntity.getUpdatedTime());
+        return boardDTO;
+    }
 }
