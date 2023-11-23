@@ -48,4 +48,10 @@ public class BoardService {
             return null;
         }
     }
+    // insert(id 없음) 와 update(id 있음) 를 구분하는건 id 값이 있냐 없냐
+    public BoardDTO update(BoardDTO boardDTO) {
+        BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
+        boardRepository.save(boardEntity);
+        return findById(boardDTO.getId());
+    }
 }
