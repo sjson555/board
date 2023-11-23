@@ -69,4 +69,10 @@ public class BoardController {
         *** 근데 이렇게하면 수정하고나면 조회수가 초기화된다? ***
         */
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        boardService.delete(id);
+        return "redirect:/board/";
+    }
 }
