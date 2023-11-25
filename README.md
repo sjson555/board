@@ -18,6 +18,17 @@
 5. 글삭제(/board/delete/{id})
 6. 페이징처리(/board/paging)
    - /board/paging?page=2
+7. 파일(이미지)첨부
+   - 단일 파일 첨부
+   - 다중 파일 첨부
+   - 파일 첨부와 관련하여 추가될 부분들
+      - save.html (+)
+      - detail.html (+)
+      - BoardDTO (+)
+      - BoardService.save() (+)
+      - BoardEntity (+)
+      - BoardFileEntity (NEW)
+      - BoardFileRepository (NEW)
    
 
 ## MySQL DataBase 계정 생성 및 권한 부여
