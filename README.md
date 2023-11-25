@@ -36,4 +36,5 @@
 create database board;
 create user board@localhost identified by '1234';
 grant all privileges on board.* to board@localhost;
+board_table(부모) - board_file_table(자식)
 ```

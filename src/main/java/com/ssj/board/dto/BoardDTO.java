@@ -3,6 +3,7 @@ package com.ssj.board.dto;
 import com.ssj.board.entity.BaseEntity;
 import com.ssj.board.entity.BoardEntity;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -30,6 +31,17 @@ public class BoardDTO {
     private int boardHits;
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
+
+    // save.html -> Controller
+    // 파일 담는 용도
+    private MultipartFile boardFile;
+    // 원본 파일 이름
+    private String originalFileName;
+    // 서버 저장용 파일 이름 (같은사진일 때 다른날짜인 경우를 구분하기 위함)
+    private String storedFileName;
+    // 파일 첨부 여부 (첨부 1, 미첨부 0)
+    private int fileAttached;
+
 
     public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
         this.id = id;
