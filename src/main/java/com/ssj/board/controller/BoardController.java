@@ -32,7 +32,7 @@ public class BoardController {
     public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
-        return "index";
+        return "redirect:/board";
     }
 
     @GetMapping("/{id}")
@@ -66,11 +66,11 @@ public class BoardController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         boardService.delete(id);
-        return "redirect:/board/paging";
+        return "redirect:/board";
     }
 
-    // /board/paging?page=1
-    @GetMapping("/paging")
+    // /board?page=1
+    @GetMapping
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
         Page<BoardDTO> boardList = boardService.paging(pageable);
         int blockLimit = 3;
@@ -79,6 +79,6 @@ public class BoardController {
         model.addAttribute("boardList", boardList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        return "paging";
+        return "index";
     }
 }
