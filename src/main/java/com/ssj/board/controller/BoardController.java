@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-//@RequestMapping("/board")
+@RequestMapping("/board")
 public class BoardController {
     /******************
      * get(주소창에보임)
