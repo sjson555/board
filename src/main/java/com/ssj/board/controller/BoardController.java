@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/board")
+//@RequestMapping("/board")
 public class BoardController {
     /******************
      * get(주소창에보임)
@@ -33,14 +33,6 @@ public class BoardController {
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
         return "index";
-    }
-
-    @GetMapping("/")
-    public String findAll(Model model) {
-        // DB에서 전체 게시글 데이터를 가져와서 list.html에 보여준다.
-        List<BoardDTO> boardDTOList = boardService.findAll();
-        model.addAttribute("boardList", boardDTOList);
-        return "list";
     }
 
     @GetMapping("/{id}")
@@ -68,41 +60,22 @@ public class BoardController {
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
-        return "detail";
-        /*
-        아래 방식으로 하면 수정해도 조회수가 올라감
         return "redirect:/board/" + boardDTO.getId();
-        *** 근데 이렇게하면 수정하고나면 조회수가 초기화된다? ***
-        */
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         boardService.delete(id);
-        return "redirect:/board/";
+        return "redirect:/board/paging";
     }
 
     // /board/paging?page=1
     @GetMapping("/paging")
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
-//        pageable.getPageNumber();
         Page<BoardDTO> boardList = boardService.paging(pageable);
-        /*
-        / 보여지는 페이지 갯수 3개
-        / 현재 사용자가 3페이지
-        / 1 2 3
-        / 현재 사용자가 7페이지
-        / 7 8 9
-        / 총 페이지 갯수 8개
-        / 7 8
-        */
-        // 보여지는 페이지 갯수 3개
         int blockLimit = 3;
-        // 1 4 7 10 ...
         int startPage = (((int) (Math.ceil((double) pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
-        // 3 6 9 12 ...
         int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit - 1 : boardList.getTotalPages();
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
