@@ -1,7 +1,9 @@
 package com.ssj.board.controller;
 
 import com.ssj.board.dto.BoardDTO;
+import com.ssj.board.dto.CommentDTO;
 import com.ssj.board.service.BoardService;
+import com.ssj.board.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ public class BoardController {
      * post(주소창에안보임)
      *******************/
     private final BoardService boardService;
+    private final CommentService commentService;
 
     @GetMapping("/save")
     public String saveForm() {
@@ -44,6 +47,11 @@ public class BoardController {
          */
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
+        /* 댓글 목록 가져오기 */
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        model.addAttribute("commentList", commentDTOList);
+
+
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
         return "detail";
