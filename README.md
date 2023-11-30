@@ -1,19 +1,3 @@
-# 회원
-## 개발환경
-1. IDE: IntelliJ IDEA Community
-2. Spring Boot 3.2.0
-3. JDK 17
-4. MySQL
-5. Spring Data JPA
-6. Thymeleaf
-## 주요기능
-1. 회원가입
-2. 로그인
-3. 회원목록
-4. 회원조회
-5. 회원정보 수정
-6. 회원삭제
-7. 로그아웃
 # 게시판
 ## 개발환경
 1. IDE: IntelliJ IDEA Community
